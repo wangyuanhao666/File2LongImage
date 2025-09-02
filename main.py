@@ -169,62 +169,11 @@ if uploaded_file is not None:
             if os.path.exists(temp_file_path):
                 os.remove(temp_file_path)
     
-    # 显示结果
+    # 显示结果 - 使用优化的显示方案
     if actual_output_path and os.path.exists(actual_output_path):
-        # 对于大图像，创建一个缩略图用于显示
-        try:
-            # 获取文件大小
-            file_size = os.path.getsize(actual_output_path) / (1024 * 1024)  # MB
-            
-            if file_size > 10:  # 如果文件大于 10MB
-                # 创建一个用于显示的缩略图
-                display_image = Image.open(actual_output_path)
-                
-                # 计算缩放比例，限制最大宽度为 2000 像素
-                max_width = 2000
-                if display_image.width > max_width:
-                    ratio = max_width / display_image.width
-                    new_width = max_width
-                    new_height = int(display_image.height * ratio)
-                    display_image = display_image.resize((new_width, new_height), Image.Resampling.LANCZOS)
-                
-                st.image(display_image, caption=f'转换后的长图 (原始大小: {file_size:.2f}MB)', use_container_width=True)
-                
-                # 提供下载链接
-                with open(actual_output_path, "rb") as file:
-                    btn = st.download_button(
-                        label="下载原始大小图像",
-                        data=file.read(),
-                        file_name=os.path.basename(actual_output_path),
-                        mime=f"image/{output_format.lower()}",
-                        key=f"download_{conversion_key}"  # 使用唯一的 key 避免重新运行
-                    )
-            else:
-                # 小文件直接显示
-                st.image(actual_output_path, caption='转换后的长图', use_container_width=True)
-                
-                # 提供下载按钮
-                with open(actual_output_path, "rb") as file:
-                    btn = st.download_button(
-                        label="下载图像",
-                        data=file.read(),
-                        file_name=os.path.basename(actual_output_path),
-                        mime=f"image/{output_format.lower()}",
-                        key=f"download_{conversion_key}"  # 使用唯一的 key 避免重新运行
-                    )
-        except Exception as e:
-            st.warning(f"图像显示出现问题: {str(e)}")
-            st.info(f"图像已成功保存到: {actual_output_path}")
-            
-            # 提供下载按钮作为备用方案
-            with open(actual_output_path, "rb") as file:
-                btn = st.download_button(
-                    label="下载生成的图像",
-                    data=file.read(),
-                    file_name=os.path.basename(actual_output_path),
-                    mime=f"image/{output_format.lower()}",
-                    key=f"download_fallback_{conversion_key}"  # 使用唯一的 key
-                )
+        # 导入优化的显示模块
+        from optimized_display import integrate_optimized_display
+        integrate_optimized_display(actual_output_path, output_format, dpi, quality)
     else:
         st.error("图像转换失败，请检查文件格式或系统依赖")
 

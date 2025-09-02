@@ -2,6 +2,12 @@
 
 一个强大的文件转换工具，可将 PDF、Word、Excel、PPT 等多种格式文件转换为高质量长图。
 
+## 🎬 演示
+
+<p align="center">
+  <img src="assets/demo.png" alt="File2LongImage 演示" width="800"/>
+</p>
+
 ## ✨ 功能特点
 
 - 📄 **多格式支持**：PDF、Word、Excel、PPT、TXT、RTF 等
