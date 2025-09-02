@@ -58,6 +58,12 @@ def convert_to_image(file_path, output_dir, dpi, output_format="PNG", quality=85
         images = pdf2image.convert_from_path(file_path, poppler_path=POPPLER_PATH, dpi=dpi)
         progress_bar.progress(0.3)
     elif file_path.lower().endswith((".doc", ".docx", ".ppt", ".pptx", ".csv", ".xls", ".xlsx", ".odt", ".rtf", ".txt", ".psd", ".cdr", ".wps", ".svg")):
+        if LIBREOFFICE_PATH is None:
+            raise ValueError("LibreOffice 未安装。请安装 LibreOffice 以支持非 PDF 文件的转换。\n"
+                           "macOS 安装方法：\n"
+                           "1. 从 https://www.libreoffice.org/download/download/ 下载\n"
+                           "2. 或使用 Homebrew: brew install --cask libreoffice")
+        
         pdf_path = os.path.join(output_dir, f"{base_name}.pdf")
         if sys.platform.startswith('win'):
             conversion_cmd = f'"{LIBREOFFICE_PATH}" --headless --convert-to pdf "{file_path}" --outdir "{output_dir}"'

@@ -1,94 +1,222 @@
-# File2LongImage
-# 文件转长图工具
+# File2LongImage - 文件转长图工具
 
-## 简介
-这个工具是一个用于将多种文件格式（如 PDF、Word、Excel、PPT 等）转换为长图片的工具。通过该工具，你可以上传一个文件，工具会自动将其转换为 PDF 并生成一张合并后的长图。这个项目使用 [Streamlit](https://streamlit.io/) 作为前端展示界面，使用 [pdf2image](https://github.com/Belval/pdf2image) 进行 PDF 到图片的转换，并使用 [Pillow](https://python-pillow.org/) 来处理图片的合并。
+一个强大的文件转换工具，可将 PDF、Word、Excel、PPT 等多种格式文件转换为高质量长图。
 
-## 功能
-- 支持多种文件格式：PDF、Word、Excel、PPT 等。
-- 将文件转换为 PDF 并自动转换为图片。
-- 合并多张图片为长图，便于查看和分享。
-- 可设置图片的 DPI（PPI）以调整输出图片的质量。
+## ✨ 功能特点
 
-## 依赖环境
-要运行此项目，请确保已安装以下依赖：
-- [Streamlit](https://streamlit.io/)：用于构建交互式 Web 应用程序。
-- [pdf2image](https://github.com/Belval/pdf2image)：将 PDF 转换为图像的库。
-- [Pillow](https://python-pillow.org/)：图像处理库。
-- [poppler-utils](https://poppler.freedesktop.org/)：用于支持 PDF 转换的工具。
+- 📄 **多格式支持**：PDF、Word、Excel、PPT、TXT、RTF 等
+- 🖼️ **智能合并**：自动将多页文档合并为一张长图
+- ⚡ **高性能**：支持批量处理和大文件转换
+- 🎨 **质量可调**：自定义 DPI 设置，平衡质量与文件大小
+- 🌐 **Web 界面**：基于 Streamlit 的现代化操作界面
+- 🖥️ **桌面版本**：提供 Tkinter 版本，便于打包分发
 
-### 如不熟悉配置流程，也可直接下载打包好的文件运行，基于tkinter，所以页面不如streamlit精美
-### 环境及可执行文件下载地址：
+## 🚀 快速开始
 
-#### [夸克盘](https://pan.quark.cn/s/a5d0e37115a8)
+### 系统要求
 
-#### [百度盘,提取码69hi](https://pan.baidu.com/s/1p6reebYtEnxt0od-BxIxyQ?pwd=69hi)
+- Python 3.8+
+- macOS / Windows / Linux
 
-## 安装步骤
-1. 克隆项目到本地：
-    ```bash
-    git clone https://github.com/你的用户名/文件转长图工具.git
-    cd 文件转长图工具
-    ```
+### 安装步骤
 
-2. 安装系统依赖 Poppler（pdf2image 需要）：
-   - **Windows**: 下载 [Poppler for Windows](http://blog.alivate.com.au/poppler-windows/)，并将其路径添加到系统环境变量，或者在 `config.py` 中设置 `POPPLER_PATH`。
-   - **macOS**: 使用 Homebrew 安装：
-     ```bash
-     brew install poppler
-     ```
-     并在 `config.py` 中设置 `POPPLER_PATH`，如 `/usr/local/bin`。
-   - **Linux**: 使用包管理器安装（以 Ubuntu 为例）：
-     ```bash
-     sudo apt-get install poppler-utils
-     ```
-     并在 `config.py` 中设置 `POPPLER_PATH`，如 `/usr/bin`。
+#### 1. 克隆项目
 
-3. 安装所需的 Python 库：
-    ```bash
-    pip install -r requirements.txt
-    ```
+```bash
+git clone https://github.com/你的用户名/File2LongImage.git
+cd File2LongImage
+```
 
-4. 安装 LibreOffice（如果需要转换非 PDF 文件，如 Word、Excel、PPT）：
-   - **Windows**: 下载并安装 [LibreOffice](https://www.libreoffice.org/download/download/)，并在 `config.py` 中设置 `LIBREOFFICE_PATH`。
-   - **Linux**/ **macOS**:
-     ```bash
-     sudo apt install libreoffice
-     ```
-     并在 `config.py` 中设置 `LIBREOFFICE_PATH`，如 `/usr/bin/libreoffice`。
+#### 2. 安装系统依赖
 
-5. 配置文件
-   - 编辑 `config.py` 文件，设置以下参数：
-     - `OUTPUT_DIR`: 输出目录的路径。
-     - `POPPLER_PATH`: Poppler 的安装路径。
-     - `LIBREOFFICE_PATH`: LibreOffice 的安装路径。
+<details>
+<summary><b>📱 macOS</b></summary>
 
-## 运行方法
-1. 在项目目录下运行以下命令启动应用：
-    ```bash
-    streamlit run main.py
-    ```
+```bash
+# 安装 Homebrew（如未安装）
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-2. 打开浏览器并访问 `http://localhost:8501`，即可看到应用界面。
+# 安装 Poppler（PDF 处理）
+brew install poppler
 
-3. 上传需要转换的文件，并设置图片 DPI。等待文件转换完成后，页面将展示合并后的长图。
+# 安装 LibreOffice（可选，用于 Office 文件转换）
+brew install --cask libreoffice
+```
 
+**注意**：
+- Poppler 会自动安装到 `/opt/homebrew/bin`（Apple Silicon）或 `/usr/local/bin`（Intel）
+- LibreOffice 会安装到 `/Applications/LibreOffice.app`
+- 配置文件已自动适配 macOS 路径，无需手动修改
 
+</details>
 
-## 文件说明
-- `main.py`: 主程序文件，处理文件上传、格式转换和图像合并等功能。
-- `requirements.txt`: 项目所需的依赖库清单。
-- `config.py`: 配置文件，包含所有的目录配置。
-- `run_app.py`: 运行此py文件可直接运行程序
-- `TKGUI.py`: 使用tkinter重新构建的程序，不通过网页运行，更方便打包和本地使用。
-  
-## 注意事项
-- **系统支持**：目前仅在windows下进行过测试，其他系统环境可能需要自行适配
-- **文件大小**：请注意上传文件的大小，因为转换和合并较大的文件可能会耗费较长时间。
-- **格式支持**：该工具依赖 LibreOffice 进行非 PDF 文件的转换，因此确保安装了正确版本的 LibreOffice。
-- **图片质量**：通过调整 DPI 来控制输出图片的质量，DPI 越高，图片越清晰，但文件大小也会增大。
+<details>
+<summary><b>🪟 Windows</b></summary>
 
-## 以上readme文件主要由o1生成，如有错误，请指出
+1. **安装 Poppler**
+   - 下载 [Poppler for Windows](http://blog.alivate.com.au/poppler-windows/)
+   - 解压到项目目录下的 `poppler` 文件夹
+   - 或添加到系统环境变量 PATH
 
-## 开源许可
-该项目基于 MIT 开源许可进行分发。详情请查看 [LICENSE](LICENSE)。
+2. **安装 LibreOffice**（可选）
+   - 下载 [LibreOffice](https://www.libreoffice.org/download/download/)
+   - 安装到默认位置或自定义路径
+
+</details>
+
+<details>
+<summary><b>🐧 Linux</b></summary>
+
+```bash
+# Ubuntu/Debian
+sudo apt-get update
+sudo apt-get install poppler-utils
+sudo apt-get install libreoffice  # 可选
+
+# CentOS/RHEL/Fedora
+sudo yum install poppler-utils
+sudo yum install libreoffice  # 可选
+```
+
+</details>
+
+#### 3. 安装 Python 依赖
+
+```bash
+pip install -r requirements.txt
+```
+
+## 📖 使用方法
+
+### Web 界面版本
+
+```bash
+# 启动应用
+streamlit run main.py
+
+# 或使用便捷脚本
+python run_app.py
+```
+
+浏览器将自动打开 `http://localhost:8501`
+
+### 桌面界面版本
+
+```bash
+python TKGUI.py
+```
+
+### 使用流程
+
+1. 选择要转换的文件
+2. 设置 DPI（默认 200，范围 72-600）
+3. 选择输出格式（PNG/JPG）
+4. 点击转换，等待处理完成
+5. 在 `output` 文件夹查看结果
+
+## ⚙️ 配置说明
+
+配置文件 `config.py` 已针对不同系统自动适配：
+
+- **macOS**：自动检测 Homebrew 安装路径
+- **Windows**：支持本地 poppler 文件夹或环境变量
+- **Linux**：使用系统标准路径
+
+通常无需手动修改配置文件。
+
+## 📁 项目结构
+
+```
+File2LongImage/
+├── main.py           # Streamlit Web 应用主程序
+├── TKGUI.py         # Tkinter 桌面版程序
+├── config.py        # 自动适配的配置文件
+├── run_app.py       # 快捷启动脚本
+├── requirements.txt # Python 依赖列表
+├── output/          # 转换结果输出目录
+└── README.md        # 项目说明文档
+```
+
+## 🔧 故障排除
+
+### macOS 常见问题
+
+**Q: 提示找不到 Poppler**
+```bash
+# 验证安装
+brew list poppler
+# 重新安装
+brew reinstall poppler
+```
+
+**Q: LibreOffice 无法转换文件**
+```bash
+# 检查是否已安装
+ls /Applications/LibreOffice.app
+# 如未安装
+brew install --cask libreoffice
+```
+
+**Q: 权限问题**
+```bash
+# 首次运行 LibreOffice 可能需要授权
+open /Applications/LibreOffice.app
+# 在系统设置中允许运行
+```
+
+### Windows 常见问题
+
+**Q: PDF 转换失败**
+- 确保 `poppler/poppler-24.07.0/Library/bin` 存在
+- 或将 Poppler bin 目录添加到系统 PATH
+
+### 通用问题
+
+**Q: 依赖安装失败**
+```bash
+# 使用国内镜像
+pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
+```
+
+## 💡 使用建议
+
+- **DPI 设置**：
+  - 屏幕查看：150-200 DPI
+  - 打印质量：300 DPI
+  - 高清输出：400-600 DPI
+
+- **格式选择**：
+  - PNG：无损压缩，适合文字内容
+  - JPG：有损压缩，文件更小，适合图片内容
+
+- **性能优化**：
+  - 大文件建议分批处理
+  - 降低 DPI 可加快处理速度
+
+## 📦 预编译版本
+
+不熟悉命令行？可下载预编译版本：
+
+- [夸克网盘](https://pan.quark.cn/s/a5d0e37115a8)
+- [百度网盘](https://pan.baidu.com/s/1p6reebYtEnxt0od-BxIxyQ?pwd=69hi) 提取码：69hi
+
+## 🤝 贡献
+
+欢迎提交 Issue 和 Pull Request！
+
+## 📄 许可证
+
+本项目基于 [MIT License](LICENSE) 开源。
+
+## 🙏 致谢
+
+- [Streamlit](https://streamlit.io/) - Web 应用框架
+- [pdf2image](https://github.com/Belval/pdf2image) - PDF 转图片
+- [Pillow](https://python-pillow.org/) - 图像处理
+- [Poppler](https://poppler.freedesktop.org/) - PDF 渲染引擎
+
+---
+
+<p align="center">
+  如有问题或建议，请提交 <a href="https://github.com/你的用户名/File2LongImage/issues">Issue</a>
+</p>
