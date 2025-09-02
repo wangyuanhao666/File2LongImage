@@ -4,6 +4,9 @@ import os
 # 输出目录
 OUTPUT_DIR = "output"
 
+# 临时文件目录（用于存储上传的文件）
+INTERMEDIATE_DIR = ".intermediate"
+
 # Poppler 路径
 if sys.platform.startswith('win'):
     POPPLER_PATH = os.path.join("poppler", "poppler-24.07.0", "Library", "bin")
