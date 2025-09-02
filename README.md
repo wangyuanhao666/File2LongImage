@@ -31,12 +31,7 @@
     cd 文件转长图工具
     ```
 
-2. 安装所需的 Python 库：
-    ```bash
-    pip install -r requirements.txt
-    ```
-
-3. 安装 Poppler：
+2. 安装系统依赖 Poppler（pdf2image 需要）：
    - **Windows**: 下载 [Poppler for Windows](http://blog.alivate.com.au/poppler-windows/)，并将其路径添加到系统环境变量，或者在 `config.py` 中设置 `POPPLER_PATH`。
    - **macOS**: 使用 Homebrew 安装：
      ```bash
@@ -48,6 +43,11 @@
      sudo apt-get install poppler-utils
      ```
      并在 `config.py` 中设置 `POPPLER_PATH`，如 `/usr/bin`。
+
+3. 安装所需的 Python 库：
+    ```bash
+    pip install -r requirements.txt
+    ```
 
 4. 安装 LibreOffice（如果需要转换非 PDF 文件，如 Word、Excel、PPT）：
    - **Windows**: 下载并安装 [LibreOffice](https://www.libreoffice.org/download/download/)，并在 `config.py` 中设置 `LIBREOFFICE_PATH`。
